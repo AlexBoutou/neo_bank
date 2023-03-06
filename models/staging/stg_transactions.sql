@@ -5,7 +5,7 @@ SELECT
     , amount_usd as amount_usd
     , transactions_state as transaction_state
     , ea_cardholderpresence 
-    , ea_merchant_mcc
+    , CAST(ea_merchant_mcc AS INT64) as merchant_mcc
     , ea_merchant_city
     , ea_merchant_country
     , direction
