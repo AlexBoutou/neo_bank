@@ -1,7 +1,7 @@
 SELECT  
     transaction_id
     , transactions_type as transaction_type
-    , transactions_currency as transactions_currency
+    , transactions_currency as transaction_currency
     , amount_usd as amount_usd
     , transactions_state as transaction_state
     , ea_cardholderpresence 
