@@ -9,6 +9,6 @@ SELECT
     , COALESCE(attributes_notifications_marketing_push,0) AS attributes_notifications_marketing_push
     , COALESCE(attributes_notifications_marketing_email,0) AS attributes_notifications_marketing_email
     , num_contacts
-    , num_referrals
-    , num_successful_referrals
+--    , num_referrals
+--    , num_successful_referrals
 FROM raw_data.users
