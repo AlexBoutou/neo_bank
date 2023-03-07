@@ -1,7 +1,7 @@
 SELECT  
     transaction_id
     , transaction_currency
-    , - amount_usd
+    , amount_usd
     , transaction_state
     , user_id
     , created_date
