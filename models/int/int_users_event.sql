@@ -11,8 +11,8 @@ UNION ALL
 SELECT 
     user_id
     , created_date as timestamp
-    , channel as event_type
-    , reason as event_detail
+    , lower(channel) as event_type
+    , lower(reason) as event_detail
     , 0 as amount
 FROM {{ ref('stg_notifications') }}
     
