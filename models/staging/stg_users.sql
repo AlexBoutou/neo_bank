@@ -1,7 +1,7 @@
 SELECT  
     user_id
     , birth_year
-    , country
+    , country as country_code
     , city
     , created_date
     , user_settings_crypto_unlocked
