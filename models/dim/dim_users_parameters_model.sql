@@ -66,8 +66,14 @@ select
     ev.avg_amount_card_payment,
     ev.count_card_payment,
     ev.avg_amount_card_atm,
-    ev.count_atm
+    ev.count_atm,
+    -- int_lifetime_user
+    li.account_creation_timestamp,
+    li.last_transaction_timestamp,
+    li.lifetime_days,
+    li.final_sold
 from {{ ref("stg_users") }} us
 left join {{ ref("stg_devices") }} de on us.user_id=de.user_id
 left join pivot_int_events_models ev on us.user_id=ev.user_id
 left join {{ ref("stg_country") }} co on  us.country_code=co.country_code
+left join {{ ref("int_lifetime_user") }} li on  us.user_id=li.user_id
