@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: int_users_event
+    description: a list of all events related to users including account_creation, transactions and notifications
+    columns:
+      - name: user_id
+      - name: timestamp
+      - name: event_type
+      - name: event_detail
+      - name: amount
+      - name: event_status
+
+  - name: int_lifetime_user
+    description: for every user, first and last interaction with lifetime in days
+    columns:
+      - name: user_id
+      - name: account_creation_timestamp
+      - name: last_transaction_timestamp
+      - name: lifetime_days
+
+  - name: int_user_event_with_sold
+    description: similar to int_user_event but with sold
+    columns:
+      - name: user_id
+      - name: timestamp
+      - name: event_type
+      - name: event_detail
+      - name: amount
+      - name: event_status
+      - name: sold
+
+  - name: int_users_last_transaction
+    description: user with his last transaction and details
+    columns:
+      - name: last_transaction_event_type
+      - name: last_transaction_event_detail
+      - name: last_transaction_event_status
+      - name: last_transaction_timestamp
+      - name: last_transaction_amount
+      - name: last_transaction_sold
+
