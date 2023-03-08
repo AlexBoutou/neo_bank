@@ -33,8 +33,8 @@ select
     us.user_id,
     us.birth_year,
     us.country_code,
-    -- stg_country
-    co.name,
+    --stg_country
+    co.country_name,
     --stg_users
     us.city,
     us.created_date,
