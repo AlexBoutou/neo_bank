@@ -1,0 +1,98 @@
+version: 2
+
+models:
+  - name: int_transactions_atm
+    description: retiring funds from an atm, always negative balance
+    columns:
+      - name: transaction_id
+      - name: transaction_currency
+      - name: amount_usd
+      - name: transaction_state
+      - name: ea_cardholderpresence
+      - name: ea_merchant_city
+      - name: ea_merchant_country
+      - name: user_id
+      - name: created_date
+
+  - name: int_transactions_card_payment
+    description: card_payment, always negative but can failed
+    columns:
+      - name: transaction_id
+      - name: transaction_currency
+      - name: amount_usd
+      - name: transaction_state
+      - name: ea_cardholderpresence
+      - name: ea_merchant_city
+      - name: ea_merchant_country
+      - name: user_id
+      - name: created_date
+
+  - name: int_transactions_cashback
+    description: money credited after a transaction, an option for paying customers
+    columns:
+      - name: transaction_id
+      - name: transaction_currency
+      - name: amount_usd
+      - name: transaction_state
+      - name: user_id
+      - name: created_date
+
+  - name: int_transactions_exchange
+    description: changing money from a currency to an another
+    columns:
+      - name: transaction_id
+      - name: transaction_currency
+      - name: amount_usd
+      - name: transaction_state
+      - name: user_id
+      - name: created_date
+
+  - name: int_transactions_fee
+    description: fee for subscriptions, exchange or negative balance
+    columns:
+      - name: transaction_id
+      - name: transaction_currency
+      - name: amount_usd
+      - name: user_id
+      - name: created_date
+
+  - name: int_transactions_refunds
+    description: refunded money, by card or on account directly
+    columns:
+      - name: transaction_id
+      - name: transaction_currency
+      - name: amount_usd
+      - name: transaction_state
+      - name: user_id
+      - name: created_date
+      - name: is_card
+
+  - name: int_transactions_tax
+    description: tax, only small amounts
+    columns:
+      - name: transaction_id
+      - name: transaction_currency
+      - name: amount_usd
+      - name: transaction_state
+      - name: user_id
+      - name: created_date
+
+  - name: int_transactions_topup
+    description: topping the account with money
+    columns:
+      - name: transaction_id
+      - name: transaction_currency
+      - name: amount_usd
+      - name: transaction_state
+      - name: user_id
+      - name: created_date
+
+  - name: int_transactions_transfer
+    description: transfering money to another account
+    columns:
+      - name: transaction_id
+      - name: transaction_currency
+      - name: amount_usd
+      - name: transaction_state
+      - name: user_id
+      - name: created_date
