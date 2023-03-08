@@ -27,7 +27,7 @@ SELECT
     , "atm" as event_detail
     , - amount_usd as amount
     , lower(transaction_state) as event_status
-FROM {{ ref('dim_transactions_atm') }}
+FROM {{ ref('int_transactions_atm') }}
 
 UNION ALL
 
@@ -38,7 +38,7 @@ SELECT
     , "card_payment" as event_detail
     , - amount_usd as amount
     , lower(transaction_state) as event_status
-FROM {{ ref('dim_transactions_card_payment') }}
+FROM {{ ref('int_transactions_card_payment') }}
 
 UNION ALL
 
@@ -49,7 +49,7 @@ SELECT
     , "cashback" as event_detail
     , + amount_usd as amount
     , lower(transaction_state) as event_status
-FROM {{ ref('dim_transactions_cashback') }}
+FROM {{ ref('int_transactions_cashback') }}
 
 UNION ALL
 
@@ -60,7 +60,7 @@ SELECT
     , "fee" as event_detail
     , - amount_usd as amount
     , "completed" as event_status
-FROM {{ ref('dim_transactions_fee') }}
+FROM {{ ref('int_transactions_fee') }}
 
 UNION ALL
 
@@ -71,7 +71,7 @@ SELECT
     , "refunds" as event_detail
     , + amount_usd as amount
     , lower(transaction_state) as event_status
-FROM {{ ref('dim_transactions_refunds') }}
+FROM {{ ref('int_transactions_refunds') }}
 
 UNION ALL
 
@@ -82,7 +82,7 @@ SELECT
     , "tax" as event_detail
     , - amount_usd as amount
     , lower(transaction_state) as event_status
-FROM {{ ref('dim_transactions_tax') }}
+FROM {{ ref('int_transactions_tax') }}
 
 UNION ALL
 
@@ -93,7 +93,7 @@ SELECT
     , "topup" as event_detail
     , + amount_usd as amount
     , lower(transaction_state) as event_status
-FROM {{ ref('dim_transactions_topup') }}
+FROM {{ ref('int_transactions_topup') }}
 
 UNION ALL
 
@@ -104,7 +104,7 @@ SELECT
     , "exchange" as event_detail
     , - amount_usd as amount
     , lower(transaction_state) as event_status
-FROM {{ ref('dim_transactions_exchange') }}
+FROM {{ ref('int_transactions_exchange') }}
 
 UNION ALL
 
@@ -115,7 +115,7 @@ SELECT
     , "exchange" as event_detail
     , amount_usd as amount
     , lower(transaction_state) as event_status
-FROM {{ ref('dim_transactions_exchange') }}
+FROM {{ ref('int_transactions_exchange') }}
 
 UNION ALL
 
@@ -129,7 +129,7 @@ SELECT
         ELSE - amount_usd
         END as amount
     , lower(transaction_state) as event_status
-FROM {{ ref('dim_transactions_transfer') }}
+FROM {{ ref('int_transactions_transfer') }}
 ORDER BY user_id,timestamp
 
 
