@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: int_users_event
+    description: a list of all events related to users including account_creation, transactions and notifications
+    columns:
+      - name: user_id
+      - name: timestamp
+      - name: event_type
+      - name: event_detail
+      - name: amount
+      - name: event_status
