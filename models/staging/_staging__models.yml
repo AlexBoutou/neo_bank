@@ -1,0 +1,63 @@
+version: 2
+
+models:
+  - name: stg_country
+    description: list of country codes with country names
+    columns:
+      - name: country_name
+      - name: country_code
+
+  - name: stg_devices
+    description: list of devices associated with user, one line per user
+    columns:
+      - name: device_category
+      - name: user_id
+
+  - name: stg_mcc_category
+    description: list of mcc category associated with upper and lower boundary
+    columns:
+      - name: category
+      - name: lower_boundary
+      - name: upper_boundary
+
+  - name: stg_notifications
+    description: list of all notifications sent between 2018 and 2019
+    columns:
+      - name: reason
+      - name: channel
+      - name: status
+      - name: user_id
+      - name: created_date
+
+  - name: stg_transactions
+    description: list of all transactions of the users from users tables sent between 2018 and 2019
+    columns:
+      - name: transaction_id
+      - name: transaction_type
+      - name: transaction_currency
+      - name: amount_usd 
+      - name: transaction_state
+      - name: ea_cardholderpresence 
+      - name: merchant_mcc
+      - name: ea_merchant_city
+      - name: ea_merchant_country
+      - name: direction
+      - name: user_id
+      - name: created_date
+
+
+  - name: stg_users
+    description: retiring funds from an atm, always negative balance
+    columns:
+      - name: user_id
+      - name: birth_year
+      - name: country as country_code
+      - name: city
+      - name: created_date
+      - name: user_settings_crypto_unlocked
+      - name: plan
+      - name: attributes_notifications_marketing_push
+      - name: attributes_notifications_marketing_email
+      - name: num_contacts
+
+
