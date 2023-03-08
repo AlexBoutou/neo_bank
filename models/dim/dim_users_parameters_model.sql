@@ -15,7 +15,7 @@ select
     us.num_contacts,
     -- stg_devices
     de.device_category,
-    -- pivot_int_events_models
+    -- int_users_event_pivot
     ev.sms,
     ev.email,
     ev.push,
@@ -41,7 +41,8 @@ select
     li.account_creation_timestamp,
     li.last_transaction_timestamp,
     li.lifetime_days,
-    li.final_sold
+    li.final_sold,
+    li.is_active
 from {{ ref("stg_users") }} us
 left join {{ ref("stg_devices") }} de on us.user_id=de.user_id
 left join {{ ref("int_users_event_pivot") }} ev on us.user_id=ev.user_id
