@@ -13,4 +13,4 @@ SELECT
     , ROUND(ten/cohort_size,2) as ten
     , ROUND(eleven/cohort_size,2) as eleven
     , ROUND(twelve/cohort_size,2) as twelve
-FROM {{ ref('dim_retention_matrix') }}
+FROM {{ ref('retention_matrix') }}
