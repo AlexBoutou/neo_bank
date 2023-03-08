@@ -2,7 +2,7 @@ WITH initial_month AS (
     SELECT
         user_id,
         FORMAT_DATETIME("%Y, %m", timestamp) as month_year,
-    FROM {{ ref('dim_user_event_with_sold') }}
+    FROM {{ ref('int_user_event_with_sold') }}
     WHERE event_type = "create_account"
 ),
 cohort_size AS (
@@ -16,7 +16,7 @@ active_month_users AS (
     SELECT
         user_id,
         FORMAT_DATETIME("%Y, %m", timestamp) as month_year
-    FROM {{ ref('dim_user_event_with_sold') }}
+    FROM {{ ref('int_user_event_with_sold') }}
     WHERE event_type="transaction"
     GROUP BY 1,2
 ),
