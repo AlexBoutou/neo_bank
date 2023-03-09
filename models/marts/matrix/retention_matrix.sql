@@ -1,33 +1,11 @@
-WITH initial_month AS (
-    SELECT
-        user_id,
-        FORMAT_DATETIME("%Y, %m", timestamp) as month_year,
-    FROM {{ ref('int_user_event_with_sold') }}
-    WHERE event_type = "create_account"
-),
-cohort_size AS (
-    SELECT
-        month_year,
-        count(user_id) as cohort_size
-    FROM initial_month
-    GROUP BY 1
-),
-active_month_users AS (
-    SELECT
-        user_id,
-        FORMAT_DATETIME("%Y, %m", timestamp) as month_year
-    FROM {{ ref('int_user_event_with_sold') }}
-    WHERE event_type="transaction"
-    GROUP BY 1,2
-),
-nb_month_users AS (
+WITH nb_month_users AS (
     SELECT
         act.user_id,
         act.month_year,
         1+DATE_DIFF(PARSE_DATE("%Y, %m", act.month_year), PARSE_DATE("%Y, %m", ini.month_year), MONTH) as mn,
         ini.month_year
-    FROM active_month_users act
-    LEFT JOIN initial_month ini using(user_id)
+    FROM {{ ref('int_users_with_transactions_month') }} act
+    LEFT JOIN {{ ref('int_acquisition_cohort_users') }} ini using(user_id)
     order by act.user_id,act.month_year
 )
 SELECT 
@@ -69,8 +47,8 @@ SUM(CASE
 SUM(CASE 
     WHEN us.mn = 12 THEN 1
     ELSE 0 END) as twelve
-FROM initial_month ini 
+FROM {{ ref('int_acquisition_cohort_users') }} ini 
+LEFT JOIN {{ ref('int_acquisition_cohort_size') }} cs on ini.month_year = cs.month_year
 LEFT JOIN nb_month_users us on ini.user_id = us.user_id
-LEFT JOIN cohort_size cs on ini.month_year = cs.month_year
 GROUP BY 1,2
 order by month_year
