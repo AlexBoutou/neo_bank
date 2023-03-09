@@ -35,4 +35,4 @@ SELECT
     , ROUND(li.nb_active_month/li.lifetime_month,2) as active_ratio
     , us.is_active
 FROM preprocess li
-LEFT JOIN {{ ref('users_parameters_model') }} us using(user_id)
+LEFT JOIN {{ ref('int_lifetime_user') }} us using(user_id)
