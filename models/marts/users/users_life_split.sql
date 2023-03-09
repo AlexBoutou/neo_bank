@@ -26,7 +26,8 @@ SELECT
     CASE 
         WHEN max(month_year) = "2019, 05" THEN 1
         ELSE 0
-    END AS is_last_period
+    END AS is_last_period,
+    ROW_NUMBER() OVER(PARTITION BY user_id, is_active_month ORDER BY min(month_year)) AS nth_period
 FROM periods_calculation
 GROUP BY user_id,is_active_month,nperiod
 ORDER BY 1,3
