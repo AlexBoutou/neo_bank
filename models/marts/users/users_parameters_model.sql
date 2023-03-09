@@ -42,9 +42,22 @@ select
     li.last_transaction_timestamp,
     li.lifetime_days,
     li.final_sold,
-    li.is_active
+    li.is_active,
+    CASE
+        WHEN us.user_id=ch.user_id THEN 1
+        ELSE 0
+    END as users_churned_after_time,
+    CASE
+        WHEN us.user_id=it.user_id THEN 1
+        ELSE 0
+    END as users_instant_churners
 from {{ ref("stg_users") }} us
 left join {{ ref("stg_devices") }} de on us.user_id=de.user_id
 left join {{ ref("int_users_event_pivot") }} ev on us.user_id=ev.user_id
 left join {{ ref("stg_country") }} co on  us.country_code=co.country_code
 left join {{ ref("int_lifetime_user") }} li on  us.user_id=li.user_id
+left join {{ ref("users_churned_after_time") }} ch on  us.user_id=ch.user_id
+left join {{ ref("users_instant_churners") }} it on  us.user_id=it.user_id
+
+
+--crypto
