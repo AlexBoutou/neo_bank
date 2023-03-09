@@ -29,6 +29,8 @@ SELECT
     , li.lifetime_month
     , li.nb_active_period
     , li.nb_inactive_period
+    ,li.nb_inactive_month
+    ,li.nb_active_month
     , ROUND(li.nb_inactive_month/li.lifetime_month,2) as inactive_ratio
     , ROUND(li.nb_active_month/li.lifetime_month,2) as active_ratio
     , us.is_active
