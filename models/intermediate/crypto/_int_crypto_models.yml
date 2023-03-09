@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: int_transactions_crypto
+    description: all cryptocurrencies transactions
+    columns:
+      - name: user_id
+      - name: transaction_id
+      - name: transaction_currency
+      - name: amount_usd
+      - name: transaction_state
+      - name: transaction_type
+      - name: direction
+      - name: user_id
+      - name: created_date
