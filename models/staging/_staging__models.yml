@@ -61,3 +61,10 @@ models:
       - name: num_contacts
 
 
+  - name: stg_currencies
+    description: list of currencies names by code and identify if it's a fiat or crypto currency
+    columns:
+      - name: currency_code
+      - name: currency_name
+      - name: is_fiat
+      - name: is_crypto
