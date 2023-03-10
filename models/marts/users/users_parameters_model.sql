@@ -2,6 +2,12 @@ select
     --stg_users
     us.user_id,
     us.birth_year,
+     CASE
+        WHEN us.birth_year <= 2001 and us.birth_year >= 1990 then "18-29"
+        WHEN us.birth_year <= 1989 and us.birth_year >= 1980 then "30-39"
+        WHEN us.birth_year <= 1979 and us.birth_year >= 1970 then "40-49"
+        ELSE ">50"
+    END as age_category,
     --stg_country
     co.country_name,
     --stg_users
