@@ -1,7 +1,8 @@
 select
     CASE
         WHEN birth_year <= 2001 and birth_year >= 1990 then "18-29"
-        WHEN birth_year <= 1988 and birth_year >= 1970 then "30-49"
+        WHEN birth_year <= 1989 and birth_year >= 1980 then "30-39"
+        WHEN birth_year <= 1979 and birth_year >= 1970 then "40-49"
         ELSE ">50"
     END as age_category,
     user_settings_crypto_unlocked,
