@@ -1,21 +1,10 @@
-with creation_filtering AS (
-    SELECT
-        ac.user_id
-        , ac.month_year
-        , ac.is_active_month
-        ,   FORMAT_TIMESTAMP( "%Y, %m",created_date) as created_date
-        , DATE_DIFF(PARSE_DATETIME("%Y, %m", month_year),EXTRACT(DATETIME FROM us.created_date),MONTH) as diff_with_creation_month
-    FROM {{ ref('int_users_activity_period') }} ac
-    LEFT JOIN {{ ref('stg_users') }} us using (user_id)
-    ORDER BY 1,2),
-periods_calculation AS (
+WITH periods_calculation AS (
     SELECT
         user_id,
         month_year,
         is_active_month,
         ROW_NUMBER() OVER(PARTITION BY user_id, is_active_month ORDER BY month_year)-DATE_DIFF(PARSE_DATETIME("%Y, %m", month_year),PARSE_DATETIME("%Y, %m", created_date), MONTH) as nperiod,
-    FROM creation_filtering
-    WHERE diff_with_creation_month >=0
+    FROM {{ ref('int_users_activity_period') }}
     ORDER BY 1,2)
 SELECT 
     user_id,
