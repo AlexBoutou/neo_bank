@@ -9,7 +9,7 @@ WITH preprocess AS (
             END) AS nb_active_period,
         SUM(
             CASE 
-                WHEN is_active_month=1 THEN 0
+                WHEN is_active_month=0 THEN 1
                 ELSE 0
             END) AS nb_inactive_period,
         SUM(
