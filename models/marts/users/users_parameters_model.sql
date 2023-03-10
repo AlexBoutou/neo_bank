@@ -2,7 +2,6 @@ select
     --stg_users
     us.user_id,
     us.birth_year,
-    us.country_code,
     --stg_country
     co.country_name,
     --stg_users
@@ -56,8 +55,8 @@ left join {{ ref("stg_devices") }} de on us.user_id=de.user_id
 left join {{ ref("int_users_event_pivot") }} ev on us.user_id=ev.user_id
 left join {{ ref("stg_country") }} co on  us.country_code=co.country_code
 left join {{ ref("int_lifetime_user") }} li on  us.user_id=li.user_id
-left join {{ ref("users_churned_after_time") }} ch on  us.user_id=ch.user_id
-left join {{ ref("users_instant_churners") }} it on  us.user_id=it.user_id
+left join {{ ref("int_churners") }} ch on  us.user_id=ch.user_id
+left join {{ ref("int_instant_churners") }} it on  us.user_id=it.user_id
 
 
 --crypto
