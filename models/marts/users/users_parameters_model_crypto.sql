@@ -43,8 +43,14 @@ select
     li.lifetime_days,
     li.final_sold,
     li.is_active
-from {{ ref("stg_users") }} us
-left join {{ ref("stg_devices") }} de on us.user_id=de.user_id
-left join {{ ref("int_users_event_pivot_crypto") }} ev on us.user_id=ev.user_id
-left join {{ ref("stg_country") }} co on  us.country_code=co.country_code
-left join {{ ref("int_lifetime_user_crypto") }} li on  us.user_id=li.user_id
+
+FROM {{ ref("stg_users") }} us
+LEFT JOIN {{ ref("int_users_event_pivot_crypto") }} ev 
+    ON us.user_id = ev.user_id
+LEFT JOIN {{ ref("stg_devices") }} de 
+    ON ev.user_id = de.user_id
+LEFT JOIN {{ ref("stg_country") }} co 
+    ON us.country_code = co.country_code
+LEFT JOIN {{ ref("int_lifetime_user_crypto") }} li 
+    ON ev.user_id = li.user_id
+WHERE ev.user_id IS NOT NULL
