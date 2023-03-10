@@ -3,7 +3,7 @@ with user_cross_month AS (
         user_id,
         month_year
     FROM {{ ref('stg_users') }}
-    CROSS JOIN {{ ref('int_events_month') }}
+    CROSS JOIN {{ ref('int_event_months') }}
     order by 1,2)
 SELECT
     um.user_id,

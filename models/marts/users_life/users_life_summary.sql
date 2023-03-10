@@ -22,7 +22,7 @@ WITH preprocess AS (
                 WHEN is_active_month=1 THEN nb_month
                 ELSE 0
             END) AS nb_active_month,
-    FROM {{ ref('users_life_split') }}
+    FROM {{ ref('int_users_life_split') }}
     group by 1)
 SELECT 
     li.user_id

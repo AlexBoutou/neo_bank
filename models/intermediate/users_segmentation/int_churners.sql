@@ -1,13 +1,13 @@
 WITH complementary_users AS (
     SELECT
         user_id
-    FROM {{ ref('users_instant_churners') }}
+    FROM {{ ref('int_instant_churners') }}
 
     UNION ALL
 
     SELECT
         user_id
-    FROM {{ ref('users_life_time_users') }}
+    FROM {{ ref('int_active_users') }}
 )
 SELECT
     us.user_id
