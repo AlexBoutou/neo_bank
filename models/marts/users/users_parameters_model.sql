@@ -8,6 +8,11 @@ select
     us.city,
     us.created_date,
     us.user_settings_crypto_unlocked,
+    -- users_parameters_model_crypto
+    CASE
+        WHEN cr.user_id = us.user_id THEN 1
+        ELSE 0
+    END AS crypto_user,
     us.plan,
     us.attributes_notifications_marketing_push,
     us.attributes_notifications_marketing_email,
@@ -50,6 +55,8 @@ select
         WHEN us.user_id=it.user_id THEN 1
         ELSE 0
     END as users_instant_churners
+
+
 from {{ ref("stg_users") }} us
 left join {{ ref("stg_devices") }} de on us.user_id=de.user_id
 left join {{ ref("int_users_event_pivot") }} ev on us.user_id=ev.user_id
@@ -57,6 +64,4 @@ left join {{ ref("stg_country") }} co on  us.country_code=co.country_code
 left join {{ ref("int_lifetime_user") }} li on  us.user_id=li.user_id
 left join {{ ref("int_churners") }} ch on  us.user_id=ch.user_id
 left join {{ ref("int_instant_churners") }} it on  us.user_id=it.user_id
-
-
---crypto
+left join {{ ref ("users_parameters_model_crypto")}} cr on us.user_id=cr.user_id
