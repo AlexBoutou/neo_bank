@@ -1,4 +1,4 @@
 SELECT
     user_id
-FROM {{ ref('users_life_summary') }}
-WHERE nb_active_period=0
+FROM {{ ref('int_lifetime_user') }}
+WHERE last_transaction_timestamp is null
