@@ -2,7 +2,7 @@ select
     --stg_users
     us.user_id,
     us.birth_year,
-     CASE
+    CASE
         WHEN us.birth_year <= 2001 and us.birth_year >= 1990 then "18-29"
         WHEN us.birth_year <= 1989 and us.birth_year >= 1980 then "30-39"
         WHEN us.birth_year <= 1979 and us.birth_year >= 1970 then "40-49"
@@ -61,8 +61,6 @@ select
         WHEN us.user_id=it.user_id THEN 1
         ELSE 0
     END as users_instant_churners
-
-
 from {{ ref("stg_users") }} us
 left join {{ ref("stg_devices") }} de on us.user_id=de.user_id
 left join {{ ref("int_users_event_pivot") }} ev on us.user_id=ev.user_id
