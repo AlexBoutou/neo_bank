@@ -45,7 +45,12 @@ SELECT
     li.nb_active_month,
     li.inactive_ratio,
     li.active_ratio,
-    li.is_active
+    li.is_active,
+    CASE 
+        WHEN pa.user_id=it.user_id then 1
+        ELSE 0
+    END as instant_churner
 FROM {{ ref ("users_parameters_model")}} pa
 LEFT JOIN {{ ref("int_users_event_pivot") }} ev on pa.user_id=ev.user_id
 LEFT JOIN {{ ref ("users_life_summary")}} li on pa.user_id=li.user_id
+LEFT JOIN {{ ref ("int_instant_churners")}} it on pa.user_id=it.user_id
