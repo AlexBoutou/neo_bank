@@ -26,7 +26,7 @@ WITH preprocess AS (
     group by 1)
 SELECT 
     li.user_id
-    , li.lifetime_month
+    , DATE_DIFF(DATE(lf.last_transaction_timestamp),DATE(lf.account_creation_timestamp), MONTH) as lifetime_month
     , li.nb_active_period
     , li.nb_inactive_period
     ,li.nb_inactive_month
@@ -36,3 +36,4 @@ SELECT
     , us.is_active
 FROM preprocess li
 LEFT JOIN {{ ref('int_lifetime_user') }} us using(user_id)
+LEFT JOIN {{ ref('int_lifetime_user') }} lf on li.user_id = lf.user_id
