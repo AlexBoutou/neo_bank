@@ -22,6 +22,6 @@ select
     round(sum(case when event_detail = "card_payment" then amount else 0 end),2) as sum_amount_card_payment,
     sum(case when event_detail = "card_payment" then 1 else 0 end) as count_card_payment,
     round(sum(case when event_detail = "atm" then amount else 0 end),2) as sum_amount_card_atm,
-    sum(case when event_detail = "card_atm" then 1 else 0 end) as count_atm,            
+    sum(case when event_detail = "atm" then 1 else 0 end) as count_atm,            
 FROM  {{ ref("int_users_event") }}
 GROUP BY user_id
