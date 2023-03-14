@@ -10,4 +10,4 @@ SELECT
 FROM {{ref("stg_transactions")}} t
 INNER JOIN {{ref("stg_currencies")}} c ON t.transaction_currency = c.currency_code
 
-WHERE transaction_type = "EXCHANGE" AND c.is_crypto = 1
+WHERE c.is_crypto = 1

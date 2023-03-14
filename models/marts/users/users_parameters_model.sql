@@ -2,12 +2,23 @@ select
     --stg_users
     us.user_id,
     us.birth_year,
+    CASE
+        WHEN us.birth_year <= 2001 and us.birth_year >= 1990 then "18-29"
+        WHEN us.birth_year <= 1989 and us.birth_year >= 1980 then "30-39"
+        WHEN us.birth_year <= 1979 and us.birth_year >= 1970 then "40-49"
+        ELSE ">50"
+    END as age_category,
     --stg_country
     co.country_name,
     --stg_users
     us.city,
     us.created_date,
     us.user_settings_crypto_unlocked,
+    -- users_parameters_model_crypto
+    CASE
+        WHEN cr.user_id = us.user_id THEN 1
+        ELSE 0
+    END AS crypto_user,
     us.plan,
     us.attributes_notifications_marketing_push,
     us.attributes_notifications_marketing_email,
@@ -57,6 +68,4 @@ left join {{ ref("stg_country") }} co on  us.country_code=co.country_code
 left join {{ ref("int_lifetime_user") }} li on  us.user_id=li.user_id
 left join {{ ref("int_churners") }} ch on  us.user_id=ch.user_id
 left join {{ ref("int_instant_churners") }} it on  us.user_id=it.user_id
-
-
---crypto
+left join {{ ref ("users_parameters_model_crypto")}} cr on us.user_id=cr.user_id
